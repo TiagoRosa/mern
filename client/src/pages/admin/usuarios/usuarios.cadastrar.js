@@ -31,9 +31,8 @@ function UsuarioCadastrar() {
         senha_usuario:senha,
         tipo_usuario:tipo}
       
-        console.log(data);
-
       const response = await api.post('/api/usuarios',data);
+      console.log(response);
 
       if(response.status === 200){
         window.location.href='/admin/usuarios'

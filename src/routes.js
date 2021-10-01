@@ -9,6 +9,7 @@ routes.get('/api/usuarios.details/:id',Usuario.details);
 routes.post('/api/usuarios',Usuario.create);
 routes.put('/api/usuarios/:id',Usuario.update);
 routes.delete('/api/usuarios/:id',Usuario.delete);
+routes.post('/api/usuarios/login',Usuario.login);
 
 //Rotas de Produtos
 routes.get('/api/produtos',Produto.index);
