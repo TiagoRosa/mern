@@ -12,6 +12,8 @@ import Usuarios from './pages/admin/usuarios';
 import UsuarioEditar from './pages/admin/usuarios/usuarios.editar';
 import UsuarioCadastrar from './pages/admin/usuarios/usuarios.cadastrar';
 
+import Login from './pages/admin/login';
+
 //Imports Client
 import Home from './pages/client/home';
 import ProdutoDetails from './pages/client/produtos/produtos.details';
@@ -24,6 +26,7 @@ export default function Routes(){
                 <Route path="/produtos/:idProduto" exact component={ProdutoDetails} />
 
                 <Route path="/admin/" exact component={Dashboard} />
+                <Route path="/admin/login" exact component={Login} />
                 <Route path="/admin/produtos" exact component={Produtos} />
                 <Route path="/admin/produtos/cadastrar" exact component={ProdutoCadastrar} />
                 <Route path="/admin/produtos/editar/:idProduto" exact component={ProdutoEditar} />

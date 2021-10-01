@@ -48,23 +48,22 @@ module.exports = {
         const {email,senha} = req.body;
         Usuario.findOne({email_usuario:email,tipo_usuario:1},function(err, user){
             if(err){
-                console.log(err);
-                res.status(200).json({error:'Erro no servidor, por favor tente novamente'});
+                res.status(500).json({status:2, error:'Erro no servidor, por favor tente novamente'});
             }else if(!user){
                 res.status(200).json({status:2, error:'E-mail ou senha não conferem'});
             }else{               
                 bcrypt.compare(senha, user.senha_usuario, function(err, matches) {
                     if (err){
-                        res.status(401).json({status:2, error:'Erro ao validar senha'});
+                        res.status(200).json({status:2, error:'Erro ao validar senha'});
                     }else if (matches){
                         const payload = {email};
                         const token = jwt.sign(payload,secret,{
                             expiresIn: '24h'
                         })
                         res.cookie('token',token,{httpOnly:true});
-                        res.status(200).json({status:1, auth:true, token:token, id_client: user._id, user_name:user.user_name})
+                        res.status(200).json({status:1, auth:true, token:token, id_client: user._id, user_name:user.nome_usuario,user_type:user.tipo_usuario})
                     }else{
-                        res.status(401).json({status:2, error:'Senha não confere'});
+                        res.status(200).json({status:2, error:'Senha não confere'});
                     }                      
                   });                
             }
