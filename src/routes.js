@@ -10,6 +10,7 @@ routes.post('/api/usuarios',Usuario.create);
 routes.put('/api/usuarios/:id',Usuario.update);
 routes.delete('/api/usuarios/:id',Usuario.delete);
 routes.post('/api/usuarios/login',Usuario.login);
+routes.get('/api/usuarios/checktoken',Usuario.checkToken);
 
 //Rotas de Produtos
 routes.get('/api/produtos',Produto.index);

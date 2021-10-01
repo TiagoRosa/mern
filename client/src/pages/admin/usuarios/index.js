@@ -72,6 +72,9 @@ function UsuarioListagem() {
                     width: '100%'
                   }}
                 >
+                  <Grid item sm={12}>
+                    <Button  variant="contained" color="primary" href={'/admin/usuarios/cadastrar/'}>Novo Usuario</Button>
+                  </Grid>
                   <h2>Listagem de Usuario</h2>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
