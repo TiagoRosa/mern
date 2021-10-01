@@ -29,7 +29,18 @@ function UsuarioListagem() {
       setUsuarios(response.data);
     }
     loadUsuarios();
-  },[])
+  },[]);
+
+  async function handleDelete(id){
+    if(window.confirm("Deseja realmente excluir esse usuario?")){
+      var result = await api.delete('/api/usuarios/'+id);
+      if(result.status===200){
+        window.location.href = '/admin/usuarios';
+      }else{
+        alert('Ocorreu um erro, por favor tente novamente');
+      }
+    }
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -90,7 +101,7 @@ function UsuarioListagem() {
                                 <TableCell align="right">
                                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                                   <Button color="primary">Atualizar</Button>
-                                  <Button color="error">Excluir</Button>
+                                  <Button color="error" onClick = {()=>handleDelete(row._id)}>Excluir</Button>
                                 </ButtonGroup>
                                 </TableCell>
                               </TableRow>
