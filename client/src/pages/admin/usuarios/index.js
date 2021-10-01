@@ -14,21 +14,28 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import api from '../../../services/api';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, LinearProgress } from '@mui/material';
 import Chip from '@mui/material/Chip';
+import { getNomeTipo,getColorTipo } from '../../../functions/static_data';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const mdTheme = createTheme();
 
 function UsuarioListagem() {
   const [usuarios,setUsuarios] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     async function loadUsuarios(){
       const response = await api.get('/api/usuarios');
 
       setUsuarios(response.data);
+      setLoading(false);
     }
     loadUsuarios();
+    
   },[]);
 
   async function handleDelete(id){
@@ -73,12 +80,15 @@ function UsuarioListagem() {
                   }}
                 >
                   <Grid item sm={12}>
-                    <Button  variant="contained" color="primary" href={'/admin/usuarios/cadastrar/'}>Novo Usuario</Button>
+                    <Button  variant="contained" color="primary" href={'/admin/usuarios/cadastrar/'}>
+                      <AddIcon />
+                    </Button>
                   </Grid>
                   <h2>Listagem de Usuario</h2>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
                       <TableContainer component={Paper}>
+                        {loading?<LinearProgress style={{width:'50%',margin:'80px auto'}}/>:(
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                           <TableHead>
                             <TableRow>
@@ -99,18 +109,22 @@ function UsuarioListagem() {
                                   {row.nome_usuario}
                                 </TableCell>
                                 <TableCell align="center">{row.email_usuario}</TableCell>
-                                <TableCell align="center">{row.tipo_usuario === 1 ? <Chip label="Administrador" color="primary" /> : <Chip label="Usuario" color="secondary" />}</TableCell>
+                                <TableCell align="center"><Chip label={getNomeTipo(row.tipo_usuario)} color={getColorTipo(row.tipo_usuario)} /> </TableCell>
                                 <TableCell align="center">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                                 <TableCell align="right">
                                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                                  <Button color="primary" href={'/admin/usuarios/editar/'+row._id}>Atualizar</Button>
-                                  <Button color="error" onClick = {()=>handleDelete(row._id)}>Excluir</Button>
+                                  <Button color="primary" href={'/admin/usuarios/editar/'+row._id}>
+                                    <EditIcon />
+                                  </Button>
+                                  <Button color="error" onClick = {()=>handleDelete(row._id)}>
+                                    <DeleteForeverIcon />
+                                  </Button>
                                 </ButtonGroup>
                                 </TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
-                        </Table>
+                        </Table>)}
                       </TableContainer>
                     </Grid>
                   </Grid>

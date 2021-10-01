@@ -4,13 +4,27 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import ImgAdmin from '../../../assets/img/medalha-feb.jpg'
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
+import {getTipoUsuario} from '../../../services/auth';
+import DashboardUsuario from './usuario';
+import DashboardAdmin from './adm';
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  
+  function getDashBoard(){
+    var tipo = getTipoUsuario();
+
+    if(tipo === '1'){
+      console.log('entrando aqui');
+      return <DashboardAdmin />
+    }else{
+      return <DashboardUsuario />
+    }
+  }
+  
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -30,7 +44,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <img src={ImgAdmin} alt='feb' />
+              {getDashBoard()}
             </Grid>
             <Footer sx={{ pt: 4 }} />
           </Container>

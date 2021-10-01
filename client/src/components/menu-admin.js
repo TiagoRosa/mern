@@ -12,6 +12,9 @@ import Typography from '@mui/material/Typography';
 import {styled} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import { getNomeUsuario } from '../services/auth';
+import LogoSistema from '../assets/img/logo.jpg'
+
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -93,6 +96,7 @@ export default function MenuAdmin({title}){
                 >
                     {title}
                 </Typography>
+                {getNomeUsuario()}
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
@@ -104,6 +108,7 @@ export default function MenuAdmin({title}){
                     px: [1],
                 }}
                 >
+                  <img style={{width:150,height:50}} src={LogoSistema} alt="Logo Sistema" />
                 <IconButton onClick={toggleDrawer}>
                     <ChevronLeftIcon />
                 </IconButton>

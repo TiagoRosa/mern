@@ -15,6 +15,9 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import api from '../../../services/api';
 import {useParams} from 'react-router-dom'
+import AddIcon from '@mui/icons-material/Add';
+import SaveIcon from '@mui/icons-material/Save';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const mdTheme = createTheme();
 
@@ -88,11 +91,17 @@ function UsuarioAtualizar() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignContent: 'center',
-                    height: 400,
-                    width: 1024
+                    alignContent: 'center'
                   }}
                 >
+                  <Grid item sm={12}>
+                    <Button  variant="contained" color="primary" href={'/admin/usuarios'}>
+                      <ArrowBackIcon />
+                    </Button>
+                    <Button variant="contained" href={'/admin/usuarios/cadastrar'} sx={{marginLeft:'2px'}}>
+                      <AddIcon />
+                    </Button>
+                  </Grid>
                   <h2>Atualização de Usuario</h2>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
@@ -151,9 +160,16 @@ function UsuarioAtualizar() {
                       />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Button variant="contained" color="primary" onClick={handleSubmit}>
-                      Salvar
-                    </Button>
+                      <Button variant="contained" 
+                        onClick={handleSubmit}
+                        sx={{
+                              backgroundColor:'green',
+                              color: '#fff',
+                              "&:hover":{backgroundColor:"#12b912"}
+                            }}
+                      >
+                        <SaveIcon />
+                      </Button>
                     </Grid>
                   </Grid>
                 </Paper>
